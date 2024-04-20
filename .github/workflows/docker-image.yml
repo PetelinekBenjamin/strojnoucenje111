@@ -41,6 +41,6 @@ jobs:
         dvc remote modify origin --local user PetelinekBenjamin
         dvc remote modify origin --local password 30663408e580bdb3f66e074627577a040f36b5ff
     - name: Pull from DVC
-      run: dvc pull data/processed/GOSPOSVETSKA_C_TURNERJEVA_UL.csv.dvc
+      run: dvc pull data/processed/GOSPOSVETSKA C - TURNERJEVA UL.csv.dvc
 
 
