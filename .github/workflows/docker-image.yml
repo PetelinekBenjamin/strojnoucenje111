@@ -49,7 +49,7 @@ jobs:
 
     - name: Update DVC data
       run: |
-        dvc add data/processed/GOSPOSVETSKA_C_TURNERJEVA_UL.csv
+        dvc add data/processed/europark_-_pobreška_c..csv
         git commit -m "Update DVC data"
         git push
 
