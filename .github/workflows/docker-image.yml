@@ -46,6 +46,14 @@ jobs:
         dvc remote modify origin --local user PetelinekBenjamin
         dvc remote modify origin --local password 30663408e580bdb3f66e074627577a040f36b5ff
 
+
+    - name: Update DVC data
+      run: |
+        dvc pull
+        git add data
+        git commit -m "Update DVC data"
+        git push
+
     - name: Run fetch_data.py
       run: python notebooks/Naloga01-IIS/fetch_data.py
 
