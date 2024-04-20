@@ -34,6 +34,18 @@ jobs:
     - name: Run flake8
       run: python test.py
 
+    - name: Install DVC
+      run: pip install dvc
+     
+    - name: Set up DVC
+      run: |
+        git config user.name "Benjamin"
+        git config user.email "benjamin.petelinek@gmail.com"
+        dvc remote add origin https://dagshub.com/PetelinekBenjamin/strojnoucenje111.dvc -f
+        dvc remote modify origin --local auth basic
+        dvc remote modify origin --local user PetelinekBenjamin
+        dvc remote modify origin --local password 30663408e580bdb3f66e074627577a040f36b5ff
+
     - name: Run fetch_data.py
       run: python notebooks/Naloga01-IIS/fetch_data.py
 
