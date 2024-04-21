@@ -47,14 +47,6 @@ jobs:
         dvc remote modify origin --local password 30663408e580bdb3f66e074627577a040f36b5ff
 
 
-    - name: Update DVC data
-      run: |
-        git add "data/processed/GOSPOSVETSKA C - TURNERJEVA UL.csv.dvc"
-        git commit -m "commit"
-        git push
-
-
-
 
     - name: Run fetch_data.py
       run: python notebooks/Naloga01-IIS/fetch_data.py
