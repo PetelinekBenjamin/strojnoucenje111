@@ -49,9 +49,8 @@ jobs:
 
     - name: Update DVC data
       run: |
-        dvc add data/processed/europark_-_pobreška_c..csv
-        git commit -m "Update DVC data"
-        git push
+        dvc run -n get_raw_data -o data/raw/data.csv python notebooks/Naloga01-IIS/fetch_data.py
+
 
     - name: Run fetch_data.py
       run: python notebooks/Naloga01-IIS/fetch_data.py
