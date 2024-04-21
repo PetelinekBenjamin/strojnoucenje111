@@ -71,11 +71,14 @@ jobs:
         dvc remote modify origin --local password 30663408e580bdb3f66e074627577a040f36b5ff
         git rm -r --cached "data/processed/GOSPOSVETSKA C - TURNERJEVA UL.csv"
         git rm -r --cached "data/raw/api_data.json"
+        git rm -r --cached "data/raw/Weather/weather_data.json"
         git commit -m "stop tracking data/processed/GOSPOSVETSKA C - TURNERJEVA UL.csv"
         dvc add "data/processed/GOSPOSVETSKA C - TURNERJEVA UL.csv"
         dvc add "data/raw/api_data.json"
+        dvc add "data/raw/api_data.json"
+        dvc add "data/raw/Weather/weather_data.json"
         dvc push -r origin
-        git push
+        
 
 
 
