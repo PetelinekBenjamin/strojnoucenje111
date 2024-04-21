@@ -49,7 +49,9 @@ jobs:
 
     - name: Update DVC data
       run: |
-        dvc run -n get_raw_data -o data/raw/data.csv python notebooks/Naloga01-IIS/fetch_data.py
+        dvc add data/processed/dvorana_tabor.csv
+        dvc dvc push -r origin
+
 
 
     - name: Run fetch_data.py
