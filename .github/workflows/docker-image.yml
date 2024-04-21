@@ -49,10 +49,10 @@ jobs:
 
     - name: Update DVC data
       run: |
-        git rm -r --cached "data/processed/dvorana_tabor.csv"
-        git commit -m "stop tracking data/processed/dvorana_tabor.csv"
-        dvc add data/processed/dvorana_tabor.csv
-        dvc dvc push -r origin
+        git add data/processed/GOSPOSVETSKA C - TURNERJEVA UL.csv.dvc
+        git commit -m "commit"
+        git push
+
 
 
 
