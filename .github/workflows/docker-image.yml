@@ -68,6 +68,8 @@ jobs:
         dvc remote modify origin --local auth basic
         dvc remote modify origin --local user PetelinekBenjamin
         dvc remote modify origin --local password 30663408e580bdb3f66e074627577a040f36b5ff
+        git rm -r --cached "data/processed/GOSPOSVETSKA C - TURNERJEVA UL.csv"
+        git commit -m "stop tracking data/processed/GOSPOSVETSKA C - TURNERJEVA UL.csv"
         dvc add "data/processed/GOSPOSVETSKA C - TURNERJEVA UL.csv"
         dvc push -r origin
 
