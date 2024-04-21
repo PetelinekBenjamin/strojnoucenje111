@@ -1,0 +1,5 @@
+outs:
+- md5: 2e1a72d9b4f7d72c2bf7186e78550aa4
+  size: 89585
+  hash: md5
+  path: weather_data.json
