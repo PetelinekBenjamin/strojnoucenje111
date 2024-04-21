@@ -68,7 +68,7 @@ jobs:
         dvc remote modify origin --local auth basic
         dvc remote modify origin --local user PetelinekBenjamin
         dvc remote modify origin --local password 30663408e580bdb3f66e074627577a040f36b5ff
-        dvc add data/processed/GOSPOSVETSKA C - TURNERJEVA UL.csv
+        dvc add "data/processed/GOSPOSVETSKA C - TURNERJEVA UL.csv"
         dvc push -r origin
 
 
