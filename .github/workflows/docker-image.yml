@@ -1,7 +1,6 @@
 name: Docker Image CI
 
 
-
 on:
   push:
     branches: [ "master" ]
@@ -46,7 +45,6 @@ jobs:
       run: |
         python notebooks/Naloga01-IIS/fetch_data.py
       
-
     - name: Run pre_process.py
       run: python notebooks/Naloga01-IIS/pre_process.py
 
@@ -58,8 +56,6 @@ jobs:
         git status
         git commit -m "Update changes"
         git push
-
-
     - name: Install DVC
       run: pip install dvc
      
@@ -80,9 +76,3 @@ jobs:
         dvc add "data/raw/api_data.json"
         dvc add "data/raw/Weather/weather_data.json"
         dvc push -r origin
-
-        
-
-
-
-        
