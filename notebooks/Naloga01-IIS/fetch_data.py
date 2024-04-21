@@ -51,7 +51,9 @@ if response.status_code == 200:
     # Pretvorba stolpca 'last_update' v želeni format (ISO 8601) pred shranjevanjem v JSON
     df_combined['last_update'] = df_combined['last_update'].dt.strftime('%Y-%m-%dT%H:%M:%S%z')
 
-    df_combined.to_json(file_path, orient='records', indent=4)
+    # Shranjevanje vseh podatkov v datoteko
+    with open(file_path, 'w') as f:
+        f.write(df_combined.to_json(orient='records', indent=4))
 
     print("Podatki uspešno dodani.")
 
