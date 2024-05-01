@@ -80,6 +80,7 @@ jobs:
 
     - name: Run GreatExpectations
       run: |
+        pip install great_expectations
         python notebooks/Naloga01-IIS/great_exp.py
   
  
