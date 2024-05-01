@@ -78,6 +78,9 @@ jobs:
         dvc push -r origin
         dvc pull
 
+    - name: Run GreatExpectations
+      run: |
+        python notebooks/Naloga01-IIS/great_exp.py
   
  
   
