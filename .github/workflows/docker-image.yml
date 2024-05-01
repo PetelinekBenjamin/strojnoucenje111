@@ -76,3 +76,8 @@ jobs:
         dvc add "data/raw/api_data.json"
         dvc add "data/raw/Weather/weather_data.json"
         dvc push -r origin
+
+    - name: Get DVC
+      run: |
+        dvc checkout e7a256bdb2eff0cc10c9132cb5aaa2c4 data/processed/reference_data.csv
+
