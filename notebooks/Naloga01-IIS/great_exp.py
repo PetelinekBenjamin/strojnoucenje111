@@ -14,6 +14,9 @@ batch_request = {'datasource_name': 'my_datasource', 'data_connector_name': 'def
 
 expectation_suite_name = "my_suite"
 
+print(batch_request)
+
+
 validator = context.get_validator(
     batch_request=BatchRequest(**batch_request),
     expectation_suite_name=expectation_suite_name
