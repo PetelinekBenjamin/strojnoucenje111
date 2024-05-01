@@ -84,10 +84,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Copy CSV content to reference_data.csv
-        run: cp data/processed/GOSPOSVETSKA\ C\ -\ TURNERJEVA\ UL.csv data/processed/reference_data.csv
+        run: cp "data/processed/GOSPOSVETSKA C - TURNERJEVA UL.csv" "data/processed/reference_data.csv"
 
       - name: Add changes to index
-        run: git add data/processed/reference_data.csv
+        run: git add "data/processed/reference_data.csv"
 
       - name: Commit changes
         run: git commit -m "Update reference_data.csv with new content"
