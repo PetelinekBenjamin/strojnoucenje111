@@ -79,6 +79,7 @@ jobs:
 
     - name: Get DVC
       run: |
-        dvc get -r https://dagshub.com/PetelinekBenjamin/strojnoucenje111.dvc e7a256bdb2eff0cc10c9132cb5aaa2c4 data/processed/reference_data.csv
+        dvc get --out data/processed/reference_data.csv https://dagshub.com/PetelinekBenjamin/strojnoucenje111.dvc e7a256bdb2eff0cc10c9132cb5aaa2c4
+
 
 
