@@ -8,7 +8,7 @@ from great_expectations.checkpoint.types.checkpoint_result import (
 from great_expectations.data_context import FileDataContext, get_context
 
 data_context: FileDataContext = get_context(
-    context_root_dir=r"C:\Users\benja\Desktop\Strojno ucenje\strojnoucenje111-master\strojnoucenje111-master\gx"
+    context_root_dir=r"gx"
 )
 
 result: CheckpointResult = data_context.run_checkpoint(
