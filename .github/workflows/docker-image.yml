@@ -52,14 +52,7 @@ jobs:
     - name: Run pre_process.py
       run: python notebooks/Naloga01-IIS/pre_process.py
 
-    - name: Commit and push
-      run: |
-        git config user.name "Benjamin"
-        git config user.email "benjamin.petelinek@gmail.com"
-        git add .
-        git status
-        git commit -m "Update changes"
-        git push
+    
     - name: Install DVC
       run: pip install dvc
      
