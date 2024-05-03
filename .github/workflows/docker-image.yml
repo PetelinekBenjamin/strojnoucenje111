@@ -51,10 +51,7 @@ jobs:
     - name: Run pre_process.py
       run: |
         python notebooks/Naloga01-IIS/pre_process.py
-        git add .
-        git commit -m "Update changes"
-        git push
-
+        
 
     - name: Run GreatExpectations
       run: |
@@ -64,7 +61,7 @@ jobs:
         git commit -m "Update changes"
         git push
 
-    - name: Run pre_process.py
+    - name: Run napolni
       run: |
         python notebooks/Naloga01-IIS/napolni.py
         git add .
@@ -72,9 +69,7 @@ jobs:
         git push
 
 
-    
 
-    
     - name: Install DVC
       run: pip install dvc
      
@@ -92,6 +87,8 @@ jobs:
         dvc add "data/raw/api_data.json"
         dvc add "data/raw/Weather/weather_data.json"
         dvc push -r origin
-        dvc pull
+        git add gx
+        git commit -m "Update changes"
+        git push
         
     
