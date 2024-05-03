@@ -58,8 +58,7 @@ jobs:
       run: |
         pip install great_expectations
         python notebooks/Naloga01-IIS/greatExp.py
-        git add data/processed/rift_test.html
-        git add data/processed/stability_test.html
+        git add gx
         git commit -m "Update changes"
         git push
 
