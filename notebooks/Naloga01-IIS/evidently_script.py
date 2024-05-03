@@ -40,7 +40,7 @@ report = Report(metrics=[
 report.run(reference_data=reference, current_data=current)
 
 # Prikaži poročilo
-report.save_html("data/processedd/rift_test.html")
+report.save_html("data/processed/rift_test.html")
 
 tests = TestSuite(tests=[
     TestNumberOfColumnsWithMissingValues(),
@@ -54,4 +54,4 @@ tests = TestSuite(tests=[
 
 tests.run(reference_data=reference, current_data=current)
 
-tests.save_html("data/processedd/stability_test.html")
+tests.save_html("data/processed/stability_test.html")
