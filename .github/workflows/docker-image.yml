@@ -57,6 +57,11 @@ jobs:
       run: |
         pip install great_expectations
         python notebooks/Naloga01-IIS/greatExp.py
+
+    - name: Run Evidently
+      run: |
+        pip install evidently
+        python notebooks/Naloga01-IIS/evidently_script.py
        
 
     - name: Run napolni
@@ -88,5 +93,34 @@ jobs:
         git add .
         git commit -m "Update changes"
         git push
+
+
+    - name: Deploy GreatExpectations to Netlify
+      uses: nwtgck/actions-netlify@v1.2
+      with:
+        publish-dir: "gx/uncommitted/data_docs/local_site"
+        production-deploy: true
+      env:
+        NETLIFY_AUTH_TOKEN: "nfp_7bkgFUDYQanQGM6YDzcLdu7PTKFm2d2bbf55"
+        NETLIFY_SITE_ID: "4f336269-65d8-4d4b-b207-bb36cd91ca73"
+
+
+    - name: Deploy evidently
+      uses: nwtgck/actions-netlify@v1.2
+      with:
+        publish-dir: "data/processed/rift_test.html"
+        production-deploy: true
+      env:
+        NETLIFY_AUTH_TOKEN: "nfp_7bkgFUDYQanQGM6YDzcLdu7PTKFm2d2bbf55"
+        NETLIFY_SITE_ID: "4f336269-65d8-4d4b-b207-bb36cd91ca73"
+
+    - name: Deploy evidently
+      uses: nwtgck/actions-netlify@v1.2
+      with:
+        publish-dir: "data/processed/stability_test.html"
+        production-deploy: true
+      env:
+        NETLIFY_AUTH_TOKEN: "nfp_7bkgFUDYQanQGM6YDzcLdu7PTKFm2d2bbf55"
+        NETLIFY_SITE_ID: "4f336269-65d8-4d4b-b207-bb36cd91ca73"
         
     
