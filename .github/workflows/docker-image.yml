@@ -95,9 +95,9 @@ jobs:
       with:
         publish-dir: "gx/uncommitted/data_docs/local_site"
         production-deploy: true
-    env:
-       NETLIFY_AUTH_TOKEN: ${{nfp_7bkgFUDYQanQGM6YDzcLdu7PTKFm2d2bbf55}}
-       NETLIFY_SITE_ID: ${{4f336269-65d8-4d4b-b207-bb36cd91ca73}}
+      env:
+        NETLIFY_AUTH_TOKEN: "nfp_7bkgFUDYQanQGM6YDzcLdu7PTKFm2d2bbf55"
+        NETLIFY_SITE_ID: "4f336269-65d8-4d4b-b207-bb36cd91ca73"
 
     
   
