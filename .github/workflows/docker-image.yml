@@ -82,6 +82,15 @@ jobs:
         git commit -m "Update changes"
         git push
 
+
+    - name: Run Evidently
+      run: |
+        pip install evidently
+        python notebooks/Naloga01-IIS/evidently_script.py
+        git add .
+        git commit -m "Update changes"
+        git push
+
     
   
  
