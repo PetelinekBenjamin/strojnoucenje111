@@ -46,18 +46,14 @@ jobs:
       run: |
         pip install great_expectations
         python notebooks/Naloga01-IIS/greatExp.py
-        git add .
-        git commit -m "Update changes"
-        git push
+        
 
 
     - name: Run Evidently
       run: |
         pip install evidently
         python notebooks/Naloga01-IIS/evidently_script.py
-        git add .
-        git commit -m "Update changes"
-        git push
+        
     
     
     - name: Run fetch_data.py
