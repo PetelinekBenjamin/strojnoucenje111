@@ -42,6 +42,24 @@ jobs:
         git config user.email "benjamin.petelinek@gmail.com"
         dvc pull -r origin --force
         
+    - name: Run GreatExpectations
+      run: |
+        pip install great_expectations
+        python notebooks/Naloga01-IIS/greatExp.py
+        git add .
+        git commit -m "Update changes"
+        git push
+
+
+    - name: Run Evidently
+      run: |
+        pip install evidently
+        python notebooks/Naloga01-IIS/evidently_script.py
+        git add .
+        git commit -m "Update changes"
+        git push
+    
+    
     - name: Run fetch_data.py
       run: |
         python notebooks/Naloga01-IIS/fetch_data.py
@@ -73,22 +91,7 @@ jobs:
         dvc pull
 
 
-    - name: Run GreatExpectations
-      run: |
-        pip install great_expectations
-        python notebooks/Naloga01-IIS/greatExp.py
-        git add .
-        git commit -m "Update changes"
-        git push
-
-
-    - name: Run Evidently
-      run: |
-        pip install evidently
-        python notebooks/Naloga01-IIS/evidently_script.py
-        git add .
-        git commit -m "Update changes"
-        git push
+    
 
     
   
