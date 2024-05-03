@@ -46,12 +46,16 @@ jobs:
     - name: Run fetch_data.py
       run: |
         python notebooks/Naloga01-IIS/fetch_data.py
+        git add .
+        git commit -m "Update changes"
+        git push
       
     - name: Run pre_process.py
-      run: python notebooks/Naloga01-IIS/pre_process.py
-
-    - name: Run pre_process.py
-      run: python notebooks/Naloga01-IIS/napolni.py
+      run: |
+        python notebooks/Naloga01-IIS/pre_process.py
+        git add .
+        git commit -m "Update changes"
+        git push
 
 
     - name: Run GreatExpectations
@@ -61,6 +65,16 @@ jobs:
         git add gx
         git commit -m "Update changes"
         git push
+
+    - name: Run pre_process.py
+      run: |
+        python notebooks/Naloga01-IIS/napolni.py
+        git add .
+        git commit -m "Update changes"
+        git push
+
+
+    
 
     
     - name: Install DVC
