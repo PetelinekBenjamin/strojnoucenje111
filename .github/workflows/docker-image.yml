@@ -46,9 +46,7 @@ jobs:
     - name: Run fetch_data.py
       run: |
         python notebooks/Naloga01-IIS/fetch_data.py
-        git add .
-        git commit -m "Update changes"
-        git push
+        
       
     - name: Run pre_process.py
       run: |
