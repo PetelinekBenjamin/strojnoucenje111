@@ -57,9 +57,7 @@ jobs:
       run: |
         pip install great_expectations
         python notebooks/Naloga01-IIS/greatExp.py
-        git add gx
-        git commit -m "Update changes"
-        git push
+       
 
     - name: Run napolni
       run: |
