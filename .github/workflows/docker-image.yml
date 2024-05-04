@@ -132,4 +132,5 @@ jobs:
         
     - name: grajenje modela
       run: |
+        pip install matplotlib scikit-learn tensorflow
         python notebooks/Naloga01-IIS/grajenje_modela.py
