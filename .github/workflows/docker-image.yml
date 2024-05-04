@@ -130,4 +130,6 @@ jobs:
         NETLIFY_AUTH_TOKEN: "nfp_7bkgFUDYQanQGM6YDzcLdu7PTKFm2d2bbf55"
         NETLIFY_SITE_ID: "4f336269-65d8-4d4b-b207-bb36cd91ca73"
         
-    
+    - name: grajenje modela
+      run: |
+        python notebooks/Naloga01-IIS/grajenje_modela.py
