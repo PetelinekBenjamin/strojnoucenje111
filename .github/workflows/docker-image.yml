@@ -134,3 +134,6 @@ jobs:
       run: |
         pip install matplotlib scikit-learn tensorflow
         python notebooks/Naloga01-IIS/grajenje_modela.py
+        git add .
+        git commit -m "Update changes"
+        git push
