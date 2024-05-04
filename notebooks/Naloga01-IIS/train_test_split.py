@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Preberi CSV datoteko
-data = pd.read_csv(data/processed/reference_data.csv')
+data = pd.read_csv('data/processed/reference_data.csv')
 
 # Določi število vrstic za testno datoteko
 test_size = int(len(data) * 0.1)
