@@ -13,11 +13,14 @@ import mlflow
 import os
 
 # Nastavitev sledenja MLflow
-mlflow.set_tracking_uri('https://dagshub.com/PetelinekBenjamin/strojnoucenje111.mlflow')
+# mlflow.set_tracking_uri('https://dagshub.com/PetelinekBenjamin/strojnoucenje111.mlflow')
+mlflow.set_tracking_uri("https://dagshub.com/ZanPovseGit/inteligentniSistem.mlflow")
 
 # Nastavitev uporabniškega imena in gesla
-os.environ["MLFLOW_TRACKING_USERNAME"] = "PetelinekBenjamin"
-os.environ["MLFLOW_TRACKING_PASSWORD"] = "30663408e580bdb3f66e074627577a040f36b5ff"
+# os.environ["MLFLOW_TRACKING_USERNAME"] = "PetelinekBenjamin"
+# os.environ["MLFLOW_TRACKING_PASSWORD"] = "30663408e580bdb3f66e074627577a040f36b5ff"
+os.environ["MLFLOW_TRACKING_USERNAME"] = "ZanPovseGit"
+os.environ["MLFLOW_TRACKING_PASSWORD"] = "bdf091cc3f58df2c8346bb8ce616545e0e40b351"
 
 def pripravi_podatke_za_ucenje(vrednosti, okno_velikost):
     X, y = [], []
