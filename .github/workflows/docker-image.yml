@@ -141,8 +141,6 @@ jobs:
     - name: ovrednotenje modela
       run: |
         python notebooks/Naloga01-IIS/ovrednotenje_modela.py
-        git add .
-        git commit -m "Update changes"
-        git push
+        
 
   
