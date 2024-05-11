@@ -116,7 +116,7 @@ with mlflow.start_run(run_name="MyModelTrainingUcenje"):
 
 
     # Shranjevanje modela
-    model_lstm.save("models\model_lstm.h5")
+    model_lstm.save("models/model_lstm.h5")
 
 
 
