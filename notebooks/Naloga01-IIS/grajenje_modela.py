@@ -3,26 +3,26 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.feature_selection import f_regression
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
 from tensorflow.keras.layers import Input, LSTM, Dense, Dropout
 from tensorflow.keras.models import Model
 from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import numpy as np
 import mlflow
+from sklearn.base import TransformerMixin
 import os
-
-
+from sklearn.preprocessing import FunctionTransformer
 
 # Nastavitev sledenja MLflow
 mlflow.set_tracking_uri('https://dagshub.com/PetelinekBenjamin/strojnoucenje111.mlflow')
-# mlflow.set_tracking_uri("https://dagshub.com/ZanPovseGit/inteligentniSistem.mlflow")
 
 # Nastavitev uporabniškega imena in gesla
 os.environ["MLFLOW_TRACKING_USERNAME"] = "PetelinekBenjamin"
 os.environ["MLFLOW_TRACKING_PASSWORD"] = "30663408e580bdb3f66e074627577a040f36b5ff"
-# os.environ["MLFLOW_TRACKING_USERNAME"] = "ZanPovseGit"
-# os.environ["MLFLOW_TRACKING_PASSWORD"] = "bdf091cc3f58df2c8346bb8ce616545e0e40b351"
 
 def pripravi_podatke_za_ucenje(vrednosti, okno_velikost):
     X, y = [], []
@@ -31,15 +31,18 @@ def pripravi_podatke_za_ucenje(vrednosti, okno_velikost):
         y.append(vrednosti[i+okno_velikost, -1])
     return np.array(X), np.array(y)
 
+def fill_missing_values(X):
+    imputer = SimpleImputer(strategy='mean')
+    X_imputed = imputer.fit_transform(X)
+    return X_imputed
+
+
+
 # Začetek MLflow teka
 with mlflow.start_run(run_name="MyModelTrainingUcenje"):
-
-
-
     # Preberi podatke
     pot_do_datoteke = r'data/processed/train_prod.csv'
     df = pd.read_csv(pot_do_datoteke, parse_dates=['last_update'], index_col='last_update')
-
 
     # Izloči manjkajoče vrednosti
     print(df.isnull().sum())
@@ -57,29 +60,46 @@ with mlflow.start_run(run_name="MyModelTrainingUcenje"):
     print(df.tail())
 
     # Filtriranje značilnic
-    najdoprinosne_znacilnice = ['temperature_2m', 'relative_humidity_2m', 'apparent_temperature', 'dew_point_2m']
+    najdoprinosne_znacilnice = ['temperature_2m', 'relative_humidity_2m', 'apparent_temperature', 'dew_point_2m', 'day', 'month', 'year']
     ciljna_znacilnica = 'available_bike_stands'
     podatki = df[najdoprinosne_znacilnice + [ciljna_znacilnica]]
 
-    # Standardizacija podatkov
-    scaler = StandardScaler()
-    podatki_standardized = scaler.fit_transform(podatki[['temperature_2m', 'relative_humidity_2m', 'apparent_temperature', 'dew_point_2m']])
-    pot_do_scalerja = "models/naloga01_scalerTest3.pkl"
-    joblib.dump(scaler, pot_do_scalerja)
-
-    scaler1 = StandardScaler()
-    podatki_standardized1 = scaler1.fit_transform(podatki[['available_bike_stands']])
-    pot_do_scalerja1 = "models/naloga01_scalerTest4.pkl"
-    joblib.dump(scaler1, pot_do_scalerja1)
-
-    podatki_standardized = podatki_standardized + podatki_standardized1
+    # Definicija cevovoda za predprocesiranje podatkov
+    preprocessing_pipeline = ColumnTransformer([
+        ('fill_missing', FunctionTransformer(fill_missing_values), ['temperature_2m', 'relative_humidity_2m', 'apparent_temperature', 'dew_point_2m']),
+        ('scaler', StandardScaler(), ['temperature_2m', 'relative_humidity_2m', 'apparent_temperature', 'dew_point_2m', 'day', 'month', 'year']),
+        ('scaler1', StandardScaler(), ['available_bike_stands']),
+    ])
 
 
-    train_data = podatki_standardized
 
+
+# Uporaba cevovoda za predprocesiranje podatkov
+    processed_data = preprocessing_pipeline.fit_transform(podatki)
+
+    print(processed_data.shape)
+
+    train_data = processed_data
+
+    # Pridobitev skalirnika iz cevovoda za predprocesiranje podatkov
+    scaler = preprocessing_pipeline.named_transformers_['scaler']
+
+    # Shranjevanje scalera v datoteko
+    scaler_path = r"models/scaler_pipeline1.pkl"
+    joblib.dump(scaler, scaler_path)
+
+
+
+
+
+    # Pridobitev skalirnika iz cevovoda za predprocesiranje podatkov
+    scaler1 = preprocessing_pipeline.named_transformers_['scaler1']
+
+    # Shranjevanje scalera v datoteko
+    scaler_path1 = r"models/scaler_pipeline2.pkl"
+    joblib.dump(scaler1, scaler_path1)
 
     print("Oblika učnih podatkov:", train_data.shape)
-
 
     # Priprava podatkov za model
     okno_velikost = 4
@@ -113,11 +133,8 @@ with mlflow.start_run(run_name="MyModelTrainingUcenje"):
     # Beleženje modela
     mlflow.keras.log_model(model_lstm, "model")
 
-
-
     # Shranjevanje modela
-    model_lstm.save("models/model_lstm.h5")
-
+    model_lstm.save(r"models/model_lstm.h5")
 
 
 
