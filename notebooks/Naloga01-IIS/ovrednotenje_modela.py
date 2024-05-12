@@ -157,7 +157,7 @@ with mlflow.start_run(run_name="MyModelTrainingOvrednotenje"):
     avg_test = (mse + mae + r2) / 3
     avg_prod = (mse_prod + mae_prod + r2_prod) / 3
 
-    if mse > mse_prod:
+    if mse < mse_prod:
         mlflow.set_tag("tag", "production")
         mlflow.register_model("runs:/" + mlflow.active_run().info.run_id + "/lstm_model", "Production")
     else:
