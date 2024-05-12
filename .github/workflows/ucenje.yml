@@ -24,6 +24,8 @@ jobs:
 
     - name: grajenje modela
       run: |
+        git config user.name "Benjamin"
+        git config user.email "benjamin.petelinek@gmail.com"
         python notebooks/Naloga01-IIS/grajenje_modela.py
         git add .
         git commit -m "Update changes"
