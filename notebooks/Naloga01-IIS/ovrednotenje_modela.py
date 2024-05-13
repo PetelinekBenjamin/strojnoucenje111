@@ -16,10 +16,8 @@ from tensorflow.keras.models import load_model
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import FunctionTransformer
 import mlflow.pyfunc
-from tensorflow.python.keras import backend as K
 import onnx
-import keras2onnx
-import tensorflow.keras.applications
+from tf2onnx import convert
 
 
 
@@ -106,16 +104,13 @@ with mlflow.start_run(run_name="MyModelTrainingOvrednotenje"):
 
 
     model_lstm = load_model(r"models/model_lstm.h5")
+    onnx_model, _ = convert.from_keras(model_lstm)
 
     
 
 
 
-    onnx_model_name = 'models/model_lstm.onnx'
-
-   
-    onnx_model = keras2onnx.convert_keras(model_lstm, model_lstm.name)
-    onnx.save_model(onnx_model, onnx_model_name)
+    
 
 
 
