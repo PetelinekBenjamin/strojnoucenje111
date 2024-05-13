@@ -104,7 +104,7 @@ with mlflow.start_run(run_name="MyModelTrainingOvrednotenje"):
 
 
     model_lstm = load_model(r"models/model_lstm.h5")
-    onnx_model, _ = convert.from_keras(model_lstm)
+    #onnx_model, _ = convert.from_keras(model_lstm)
 
     
 
