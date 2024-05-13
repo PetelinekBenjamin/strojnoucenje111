@@ -16,8 +16,7 @@ from tensorflow.keras.models import load_model
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import FunctionTransformer
 import mlflow.pyfunc
-import tf2onnx
-import keras2onnx
+from keras2onnx import convert_keras
 
 
 
@@ -106,15 +105,16 @@ with mlflow.start_run(run_name="MyModelTrainingOvrednotenje"):
 
     # Pretvorite model v format ONNX
    # Pretvorite model v format ONNX
-    onnx_model, _ = tf2onnx.convert.from_keras(model_lstm)
+    # Nalož
 
-# Shranite ONNX model
-    # Pretvorite model v format ONNX
-    onnx_model = keras2onnx.convert_keras(model_lstm)
+# Pretvarjanje modela Keras v ONNX
+    onnx_model = convert_keras(model_lstm)
 
-# Shranite ONNX model
-    onnx_path = "models/model_lstm.onnx"
-    keras2onnx.save_model(onnx_model, onnx_path)
+    output_path = "models/model_lstm.onnx"
+
+    # Shranite model ONNX v datoteko
+    with open(output_path, "wb") as f:
+        f.write(onnx_model.SerializeToString())
 
 
 
