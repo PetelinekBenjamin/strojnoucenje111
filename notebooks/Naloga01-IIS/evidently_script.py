@@ -15,21 +15,21 @@ from evidently.tests.base_test import generate_column_tests
 from evidently.test_preset import DataStabilityTestPreset, NoTargetPerformanceTestPreset
 from evidently.tests import *
 
-# Preberi podatke iz CSV-ja
+
 file_path = r'data/processed/reference_data.csv'
 housing_data = pd.read_csv(file_path)
 
-# Pretvori podatke v DataFrame
+
 housing_data = pd.DataFrame(housing_data)
 
-# Izberi stolpce, ki jih boš uporabil/a za analizo
+
 columns_to_analyze = ['precipitation_probability', 'apparent_temperature', 'dew_point_2m', 'relative_humidity_2m', 'temperature_2m']
 
-# Dodaj naključne napovedi za potrebe primera
+
 for column in columns_to_analyze:
     housing_data[column + '_prediction'] = housing_data[column].values + np.random.normal(0, 5, housing_data.shape[0])
 
-# Izberi vzorce za primerjavo (če želiš)
+
 reference = housing_data.sample(n=50, replace=False)
 current = housing_data.sample(n=50, replace=False)
 
@@ -39,7 +39,7 @@ report = Report(metrics=[
 
 report.run(reference_data=reference, current_data=current)
 
-# Prikaži poročilo
+
 report.save_html("data/processed/rift_test.html")
 
 tests = TestSuite(tests=[
