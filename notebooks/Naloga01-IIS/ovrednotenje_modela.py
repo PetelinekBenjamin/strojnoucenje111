@@ -18,6 +18,8 @@ from sklearn.preprocessing import FunctionTransformer
 import mlflow.pyfunc
 import onnx
 from tf2onnx import convert
+from tf2onnx.convert import from_keras_model
+
 
 
 
@@ -104,7 +106,9 @@ with mlflow.start_run(run_name="MyModelTrainingOvrednotenje"):
 
 
     model_lstm = load_model(r"models/model_lstm.h5")
-    #onnx_model, _ = convert.from_keras(model_lstm)
+    
+    onnx_model, _ = from_keras_model(model_lstm)
+
 
     
 
