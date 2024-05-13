@@ -1,4 +1,6 @@
 flake8
 pandas
 requests
+tensorflow==2.10.1
+tf2onnx==1.16.1
 
