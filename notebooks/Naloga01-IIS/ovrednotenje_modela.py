@@ -19,6 +19,8 @@ import mlflow.pyfunc
 from tensorflow.python.keras import backend as K
 import onnx
 import keras2onnx
+import tensorflow.keras.applications
+
 
 
 
