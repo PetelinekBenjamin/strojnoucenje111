@@ -19,6 +19,7 @@ import mlflow.pyfunc
 import tf2onnx
 
 
+
 # Nastavitev sledenja MLflow
 mlflow.set_tracking_uri('https://dagshub.com/PetelinekBenjamin/strojnoucenje111.mlflow')
 # mlflow.set_tracking_uri("https://dagshub.com/ZanPovseGit/inteligentniSistem.mlflow")
@@ -103,11 +104,11 @@ with mlflow.start_run(run_name="MyModelTrainingOvrednotenje"):
     model_lstm = load_model(r"models/model_lstm.h5")
 
     # Pretvorite model v format ONNX
-    onnx_model, _ = tf2onnx.convert.from_keras_model(model_lstm)
+   # Pretvorite model v format ONNX
+    onnx_model, _ = tf2onnx.convert.from_keras(model_lstm)
 
-
-    # Shranite ONNX model
-    tf2onnx.save_model(onnx_model, "models/model_lstm.onnx")
+# Shranite ONNX model
+    tf2onnx.save_model(onnx_model, r"models/model_lstm.onnx")
 
 
 
