@@ -16,6 +16,7 @@ from tensorflow.keras.models import load_model
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import FunctionTransformer
 import mlflow.pyfunc
+import tf2onnx
 import keras2onnx
 
 
