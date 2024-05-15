@@ -107,7 +107,7 @@ with mlflow.start_run(run_name="MyModelTrainingOvrednotenje"):
 
     model_lstm = load_model(r"models/model_lstm.h5")
     
-    onnx_model, _ = tf2onnx.convert_keras(model_lstm)
+    
 
 
     
@@ -155,7 +155,15 @@ with mlflow.start_run(run_name="MyModelTrainingOvrednotenje"):
 
     # Pridobitev modela
     model_uri = "runs:/" + last_run_id + "/lstm_model"
-    # model = mlflow.pyfunc.load_model(model_uri)
+    model = mlflow.pyfunc.load_model(model_uri)
+
+    y_pred = model.predict(X_test)
+    mse = mean_squared_error(y_test, y_pred)
+    mae = mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+    print("DELA",mse)
+    print("DELA",mae)
+    print("DELA",r2)
 
 
     print(metrics_production)
