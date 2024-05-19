@@ -24,13 +24,12 @@ jobs:
           pip install -r requirements.txt dvc
           pip install matplotlib scikit-learn mlflow tensorflow tf2onnx 
 
-      - name: Set up Python (again)
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3
+      
+      - name: Build Docker image from Dockerfile
+        run: docker build -f Dockerfile -t api .
 
-      - name: Install Python dependencies (again)
-        run: pip install -r requirements.txt
+      - name: Build Docker image from Dockerfile1
+        run: docker build -f Dockerfile1 -t vmesnik .
 
       - name: Set context to Okteto Cloud
         uses: okteto/context@latest
