@@ -1,7 +1,7 @@
 name: Predictive Model Pipeline
 on:
   workflow_run:
-    workflows: ["Docker Image CI"]
+    workflows: ["Predictive Model Pipeline"]
     types:
       - completed
 
