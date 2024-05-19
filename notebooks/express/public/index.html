@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Klic</title>
+</head>
+<body>
+    <button id="getPredictionsBtn">Pridobi Napovedi</button>
+    <div id="predictions"></div>
+
+    <script>
+        document.getElementById('getPredictionsBtn').addEventListener('click', function() {
+            fetch('/getPredictions')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('predictions').innerText = data;
+                })
+                .catch(error => console.error('Napaka:', error));
+        });
+    </script>
+</body>
+</html>
