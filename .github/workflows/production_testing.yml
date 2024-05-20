@@ -1,6 +1,8 @@
 name: Predictive Model Pipeline
 
 on:
+  schedule:
+    - cron: '0 0 * * *' # To bo zagnalo workflow vsakih 24 ur ob polnoči UTC
   workflow_run:
     workflows: ["Predictive Model Pipeline"]
     types:
@@ -24,8 +26,5 @@ jobs:
           pip install -r requirements.txt dvc
           pip install matplotlib scikit-learn mlflow tensorflow tf2onnx 
 
-      
       - name: Ovrednotenje
-        run: oceni_napovedi.py
-
-      
+        run: python oceni_napovedi.py
