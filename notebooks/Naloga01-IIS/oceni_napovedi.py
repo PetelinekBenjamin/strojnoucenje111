@@ -27,7 +27,7 @@ for pred in predictions:
     pred['timestamp'] = datetime.fromisoformat(pred['timestamp']).replace(tzinfo=None)
 
 # Branje CSV datoteke
-csv_path = r'C:\Users\benja\Desktop\Strojno_ucenje_Koncna_Verzija\strojnoucenje111-master\data\processed\reference_data.csv'
+csv_path = r'data\processed\reference_data.csv'
 df = pd.read_csv(csv_path, parse_dates=['last_update'])
 
 # Pretvorba stolpca last_update v CSV v objekte datetime brez časovnega pasu
