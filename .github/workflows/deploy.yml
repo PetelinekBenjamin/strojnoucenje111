@@ -24,41 +24,29 @@ jobs:
           pip install -r requirements.txt dvc
           pip install matplotlib scikit-learn mlflow tensorflow tf2onnx 
 
-      
-      - name: Build Docker image from Dockerfile
+      - name: Build Docker image for API
         run: docker build -f Dockerfile -t api .
 
-      - name: Build Docker image from Dockerfile1
+      - name: Build Docker image for Interface
         run: docker build -f Dockerfile1 -t vmesnik .
 
-      - name: Set context to Okteto Cloud
-        uses: okteto/context@latest
-        with:
-          token: ${{ secrets.OKTETO_TOKEN }}
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Deploy your preview environment
-        uses: okteto/deploy-preview@latest
+      - name: Push Docker image for API
+        run: docker tag api:latest ${DOCKER_USERNAME}/api:latest && docker push ${DOCKER_USERNAME}/api:latest
+
+      - name: Push Docker image for Interface
+        run: docker tag vmesnik:latest ${DOCKER_USERNAME}/vmesnik:latest && docker push ${DOCKER_USERNAME}/vmesnik:latest
+
+      - name: Deploy to Koyeb
+        run: |
+          koyeb service update api-service \
+            --docker ${DOCKER_USERNAME}/api:latest \
+            --token ${KOYEB_API_TOKEN}
+          koyeb service update interface-service \
+            --docker ${DOCKER_USERNAME}/vmesnik:latest \
+            --token ${KOYEB_API_TOKEN}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          name: staging-${{ github.event.number }}-OKTETO_USERNAME
-          scope: personal
-          timeout: 15m
-
-      - uses: nev7n/wait_for_response@v1
-        with:
-          url: https://api-staging-${{ github.event.number }}-okteto_username.cloud.okteto.net
-          responseCode: 200
-          timeout: 4000
-
-      - name: Run API tests against Staging Namespace
-        run: pytest
-        env:
-          STAGING_COUCHDB_URL: https://api-staging-${{ github.event.number }}-okteto_username.cloud.okteto.net
-
-      - name: Build and deploy application container to Okteto Flask Namespace
-        if: ${{ github.event_name == 'push' }}
-        uses: okteto/deploy-stack@master
-        with:
-          name: okteto-flask-app
-          build: true
+          KOYEB_API_TOKEN: ${{ secrets.KOYEB_API_TOKEN }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
