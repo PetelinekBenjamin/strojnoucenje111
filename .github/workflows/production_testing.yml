@@ -26,6 +26,6 @@ jobs:
 
       
       - name: Ovrednotenje
-        run: ovrednotenje_modela.py
+        run: oceni_napovedi.py
 
       
